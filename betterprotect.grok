@@ -20,7 +20,7 @@ AMAVIS_KV ((%{AMAVIS_MESSAGEID}|%{AMAVIS_SIZE}|%{AMAVIS_TESTS}|%{AMAVIS_FROM}|%{
 AMAVIS \(%{DATA:amavis_id}\) %{WORD:amavis_action} %{NOTSPACE:amavis_category} (\{%{DATA:amavis_match}\})?, AM.PDP-SOCK \[(IPv6:)?%{IP:amavis_relay_ip}\] \[(IPv6:)?%{IP:amavis_amavis_origin_ip}\] <%{DATA:amavis_from}> -> <%{DATA:amavis_to}>, Queue-ID: %{POSTFIX_QUEUEID:postfix_queueid}, %{AMAVIS_KV}%{POSINT:amavis_elapsedtime} ms
 
 # OpenDkim
-OPENDKIM_SIGNATURE_ERROR (no|bad signature data)
+OPENDKIM_SIGNATURE_ERROR ((no|bad) signature data)
 OPENDKIM_SIGNATURE_SUCCESS (DKIM verification successful)
 OPENDKIM_SIGNATURE_DATA (%{POSTFIX_QUEUEID:postfix_queueid}): %{OPENDKIM_SIGNATURE_ERROR:opendkim_signature}|message has signatures from %{GREEDYDATA:opendkim_signature}|%{OPENDKIM_SIGNATURE_SUCCESS:opendkim_signature}
 OPENDKIM_VERIFICATION_KEY (%{POSTFIX_QUEUEID:postfix_queueid}): s=%{DATA:opendkim_selector} d=%{DATA:opendkim_domain} a=%{DATA:opendkim_algorithm} %{WORD:opendkim_ssl}(?:\s+%{GREEDYDATA:opendkim_error})?
